@@ -17,13 +17,18 @@ spec:
       - name: backend
         image: ghcr.io/libreserve/libreserve-backend:dev
         env:
+            - name: NODE_ENV
+              value: "production"
             - name: FRONTEND_URL
               value: "https://dev-coe.ionize13.com"
             - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: GOOGLE_CLIENT_ID
+              value: "336497013992-n2rfrnbmvfjm7toipruvbau5lu3sqmk0.apps.googleusercontent.com"
+            - name: AWS_REGION
+              value: "ap-southeast-2"
+            - name: S3_BUCKET_NAME
+              value: "dev-coe-workshop"
+            - name: S3_BUCKET_PUBLIC
+              value: "true"
             - name: GOOGLE_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -34,6 +39,16 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: SESSION_SECRET
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: AWS_SECRET_ACCESS_KEY
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
